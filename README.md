@@ -1,15 +1,44 @@
-# Ministry of Justice Template Repository
+# Infrastructure test tool based on Cucumber.js
 
-Use this template to [create a repository] with the default initial files for a Ministry of Justice Github repository, including:
+## Prerequisites
 
-* The correct LICENSE
-* Github actions
-* .gitignore file
+Before running the features for the first time, add required dependencies
 
-Once you have created your repository, please:
+```
+npm install --save-dev @cucumber/cucumber
+npm install shelljs
+npm install sleep
+```
 
-* Edit the copy of this README.md file to document your project
-* Grant permissions to the appropriate MoJ teams
-* Setup branch protection
+Configure AWS profiles in `~/.aws/config`, for example
 
-[create a repository]: https://github.com/ministryofjustice/template-repository/generate
+```
+[default]
+region = eu-west-2
+
+[profile mod-root]
+mfa_serial = arn:aws:iam::123456789991:mfa/george-f-admin
+credential_process = aws-vault exec mod-root --json --prompt=osascript
+
+[profile sprinkler-development]
+source_profile=mod-root
+role_arn=arn:aws:iam::123456789992:role/ModernisationPlatformAccess
+mfa_serial=arn:aws:iam::123456789991:mfa/george-f-admin
+role_session_name=george-f-admin
+```
+
+## Usage
+
+Run features
+
+    ./node_modules/.bin/cucumber-js
+
+## References
+
+1. https://github.com/cucumber/cucumber-js
+2. [Running specific features](https://github.com/cucumber/cucumber-js/blob/main/docs/cli.md#running-specific-features)
+3. https://cucumber.io/docs/gherkin/reference/
+4. https://github.com/cucumber/cucumber-expressions/
+5. https://nodejs.org/api/assert.html
+6. [Accessing EC2s using bastions](https://user-guide.modernisation-platform.service.justice.gov.uk/user-guide/accessing-ec2s.html#accessing-ec2s-using-bastions)
+7. [Avoiding too much security](https://security-guidance.service.justice.gov.uk/setecastronomy/#not-all-domain-names-or-ip-addresses-in-government-systems-are-sensitive-items)
