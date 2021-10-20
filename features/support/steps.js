@@ -22,7 +22,7 @@ When('{word} connects to {word} on port {int} with timeout {int} seconds', funct
         var command = `aws ssm send-command \
             --document-name "AWS-RunRemoteScript" \
             --instance-ids "${instanceIds}" \
-            --parameters '{"sourceType":["GitHub"],"sourceInfo":["{\\"owner\\":\\"ministryofjustice\\", \\"repository\\":\\"modernisation-platform-infrastructure-test\\", \\"getOptions\\": \\"branch:main\\", \\"path\\": \\"util\\"}"],"commandLine":["port-is-open.sh ${host2} ${port} ${timeoutSeconds}"]}' \
+            --parameters '{"sourceType":["GitHub"],"sourceInfo":["{\\"owner\\":\\"ministryofjustice\\", \\"repository\\":\\"modernisation-platform-infrastructure-test\\", \\"getOptions\\": \\"branch:main\\", \\"path\\": \\"util\\"}"],"commandLine":["is-port-open.sh ${host2} ${port} ${timeoutSeconds}"]}' \
             --query "Command.CommandId" \
             --output text \
             --profile ${this.profile} \
