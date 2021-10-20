@@ -13,7 +13,7 @@ Given('region {word}', function (region) {
     this.setRegion(region);
 });
 
-When('{word} connects to {word} at port {int} with timeout {int} seconds', function (instanceIds, host2, port, timeoutSeconds) {
+When('{word} connects to {word} on port {int} with timeout {int} seconds', function (instanceIds, host2, port, timeoutSeconds) {
     try {
         let region = config.ssm.ssm_default_region;
         if (this.region != null && this.region.trim().length > 0) {

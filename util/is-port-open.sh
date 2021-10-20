@@ -2,8 +2,8 @@
 # Check if port is open: <address> <port> <timeout-seconds>
 #
 # usage examples:
-#    ./port-is-open.sh 127.0.0.1 80 2
-#    ./port-is-open.sh google.com 80 2
+#    ./is-port-open.sh 127.0.0.1 80 2
+#    ./is-port-open.sh google.com 80 2
 # https://superuser.com/questions/621870/test-if-a-port-on-a-remote-system-is-reachable-without-telnet
 # The script checks and picks a command that is installed on the system.
 
