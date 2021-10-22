@@ -14,7 +14,13 @@ if command -v nc &>/dev/null; then
   nc -v -G "${timeout_seconds}" -z -w2 $1 $2
 elif command -v curl &>/dev/null; then
   echo 'Using: curl'
-  curl --connect-timeout "${timeout_seconds}" $1:$2
+  out=$((curl --connect-timeout "${timeout_seconds}" $1:$2 1>&2) 2>&1)
+  success_response1='curl: (56) Recv failure: Connection reset by peer'
+  if [ -z "${out##*$success_response1*}" ]; then
+    echo 'port-is-open'
+    exit 0
+  fi
+  echo "$out"
 elif command -v telnet &>/dev/null; then
   echo 'Using: telnet'
   telnet $1 $2
